@@ -60,6 +60,15 @@ function checkRouteActive($route) {
             </a>
           </li>
 
+           <li class="nav-item">
+            <a href="{{url('admin/artikel')}}" class="nav-link {{checkRouteActive('admin/artikel')}}">
+              <i class="nav-icon fas fa-archive"></i>
+              <p>
+               Artikel
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="{{url('admin/user')}}" class="nav-link {{CheckRouteActive('admin/user')}}">
               <i class="nav-icon fa fa fa-users"></i>

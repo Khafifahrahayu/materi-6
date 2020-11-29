@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ClientArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +30,22 @@ Route::get('/kategori',[HomeController:: class, 'showKategori']);
 
 Route::get('/test/{produk}/{hargaMin?}/{hargaMax?}',[HomeController:: class, 'test']);
 Route::prefix('admin')->middleware('auth')->group(function(){
+        Route::post('artikel/filter', [ArtikelController:: class, 'filter']);
+        Route::resource('artikel', ArtikelController:: class);
         Route::post('produk/filter', [ProdukController:: class, 'filter']);
         Route::resource('produk', ProdukController:: class);
         Route::resource('user', UserController:: class);
 
     });
+
+Route::get('/', [ClientArtikelController::class, 'index']);
+Route::post('/filter', [ClientArtikelController::class, 'filter']);
+Route::get('baca/{artikel}', [ClientArtikelController::class, 'create']);
+Route::post('baca/{artikel}', [ClientArtikelController::class, 'store']);
+Route::get('detail/{artikel}', [ClientArtikelController::class, 'show']);
+Route::get('komentar/{artikel}/edit', [ClientArtikelController::class, 'edit']);
+Route::put('komentar/{artikel}', [ClientArtikelController::class, 'update']);
+Route::delete('komentar/{artikel}', [ClientArtikelController::class, 'destroy']);
 
 
 Route::get('/login',[AuthController:: class, 'showLogin'])->name('login');
